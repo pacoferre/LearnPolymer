@@ -1,0 +1,27 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+
+<dom-module id="show-item">
+    <template>
+        <div>Location: <span>{{house.location}}</span></div>
+        <div>Price: <span>{{house.price}}</span></div>
+        <button on-tap="_doSell">[[buttonText(noSell)]]</button>
+    </template>
+    <script>
+        Polymer({
+            is: 'show-item',
+            properties: {
+                noSell: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+            _doSell: function()
+            {
+                this.fire('sell', this.house);
+            },
+            buttonText: function (noSell) {
+                return noSell ? "Cancel" : "Sell!";
+            }
+        });
+    </script>
+</dom-module>

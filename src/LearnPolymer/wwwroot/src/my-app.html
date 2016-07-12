@@ -1,0 +1,154 @@
+<link rel="import" href="../../lib/polymer/polymer.html">
+<link rel="import" href="../../lib/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../lib/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../lib/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../lib/app-layout/app-header/app-header.html">
+<link rel="import" href="../../lib/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../lib/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../lib/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../lib/iron-pages/iron-pages.html">
+<link rel="import" href="../../lib/iron-selector/iron-selector.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="my-view1.html">
+<link rel="import" href="my-view2.html">
+<link rel="import" href="my-view3.html">
+<link rel="import" href="my-view4.html">
+<link rel="import" href="my-view5.html">
+<link rel="import" href="my-view6.html">
+<link rel="import" href="my-view7.html">
+<link rel="import" href="my-view8.html">
+<link rel="import" href="my-view9.html">
+<link rel="import" href="my-view10.html">
+<link rel="import" href="my-view11.html">
+
+<dom-module id="my-app">
+    <template>
+        <style>
+            :host {
+                display: block;
+                --app-primary-color: #4285f4;
+                --app-secondary-color: black;
+            }
+
+            app-header {
+                background-color: var(--app-primary-color);
+                color: #fff;
+            }
+
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
+
+            .drawer-list {
+                margin: 0 20px;
+            }
+
+            .drawer-list div {
+                display: block;
+                padding: 0 16px;
+                line-height: 40px;
+                text-decoration: none;
+                color: var(--app-secondary-color);
+                cursor: pointer;
+            }
+
+            .drawer-list div.iron-selected {
+                color: black;
+                font-weight: bold;
+            }
+        </style>
+
+        <app-drawer-layout fullbleed>
+
+            <!-- Drawer content -->
+            <app-drawer>
+                <app-toolbar>Menu</app-toolbar>
+                <iron-selector selected="{{currentView}}" attr-for-selected="name" class="drawer-list"
+                               role="navigation">
+                    <div name="view1">1. Properties</div>
+                    <div name="view2">2. Properties - Defining</div>
+                    <div name="view3">3. Setting properties</div>
+                    <div name="view4">4. Binding properties</div>
+                    <div name="view5">5. Notifying to parent</div>
+                    <div name="view6">6. Object properties</div>
+                    <div name="view7">7. Using objects</div>
+                    <div name="view8">8. Computed, Observers and Events</div>
+                    <div name="view9">9. Firing Events and DOM manipulation</div>
+                    <div name="view10">10. Repeaters, Listeners and Boolean props</div>
+                    <div name="view11">11. AJAX</div>
+                </iron-selector>
+            </app-drawer>
+
+            <!-- Main content -->
+            <app-header-layout has-scrolling-region>
+
+                <app-header condenses reveals effects="waterfall">
+                    <app-toolbar>
+                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+                        <div title>Learn Polymer by Example - [[text]] / [[person.name]] [[person.surName]]</div>
+                    </app-toolbar>
+                </app-header>
+
+                <iron-pages role="main" selected="{{currentView}}" attr-for-selected="key">
+                    <my-view1 key="view1"></my-view1>
+                    <my-view2 key="view2"></my-view2>
+                    <my-view3 key="view3" text="John Smith"></my-view3>
+                    <my-view4 key="view4" text="[[text]]"></my-view4>
+                    <my-view5 key="view5" text="{{text}}"></my-view5>
+                    <my-view6 key="view6" name="{{person.name}}" sur-name="{{person.surName}}"></my-view6>
+                    <my-view7 key="view7" the-person="{{person}}"></my-view7>
+                    <my-view8 key="view8" the-person="{{person}}"></my-view8>
+                    <my-view9 key="view9" the-person="{{person}}" on-gates="_doGates"></my-view9>
+                    <my-view10 key="view10" the-person="{{person}}"></my-view10>
+                    <my-view11 key="view11"></my-view11>
+                </iron-pages>
+            </app-header-layout>
+        </app-drawer-layout>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'my-app',
+            properties: {
+                currentView: {
+                    type: String,
+                    value: "view1"
+                },
+                text: {
+                    type: String,
+                    value: 'Steve Jobs',
+                },
+                person: {
+                    type: Object,
+                    value: function () {
+                        return {
+                            name: 'Steve',
+                            surName: 'Jobs',
+                            houses: [
+                                { location: 'New york', price: 100000 },
+                                { location: 'Bahamas', price: 200000 },
+                                { location: 'Paris', price: 300000 },
+                                { location: 'Madrid', price: 400000 }
+                            ]
+                        };
+                    }
+                }
+            },
+            _doGates: function (event)
+            {
+                event.stopPropagation();  // if neccesary
+
+                // event.detail has the data associated with the event.
+                //debugger;
+
+                this.text = 'Bill Gates has arrived!!!';
+
+                // Fail
+                this.person.name = 'Bill';
+
+                // Ok
+                //this.set('person.name', 'Bill');
+            }
+        });
+    </script>
+</dom-module>

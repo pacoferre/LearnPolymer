@@ -1,0 +1,26 @@
+<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view2">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">2</div>
+            <h1>Properties - Defining</h1>
+            <paper-input value="{{text}}" label="Name"></paper-input>
+            Hello [[text]]
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view2',
+            properties: {
+                text: {
+                    type: String,
+                    value: "Initial value"
+                }
+            }
+        });
+    </script>
+</dom-module>

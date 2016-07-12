@@ -1,0 +1,29 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view6">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">6</div>
+            <h1>Object properties</h1>
+            <paper-input value="{{name}}" label="Name"></paper-input>
+            <paper-input value="{{surName}}" label="Surname"></paper-input>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view6',
+            properties: {
+                name: {
+                    type: String,
+                },
+                surName: {
+                    type: String,
+                    notify: true,
+                }
+            }
+        });
+    </script>
+</dom-module>

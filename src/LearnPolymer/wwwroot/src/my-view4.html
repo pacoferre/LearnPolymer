@@ -1,0 +1,25 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view4">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">4</div>
+            <h1>Binding properties</h1>
+            <paper-input value="{{text}}" label="Name"></paper-input>
+            Hello [[text]]
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view4',
+            properties: {
+                text: {
+                    type: Object,
+                }
+            }
+        });
+    </script>
+</dom-module>

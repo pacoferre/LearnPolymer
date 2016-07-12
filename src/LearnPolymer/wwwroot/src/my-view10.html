@@ -1,0 +1,63 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="../lib/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="show-item.html">
+
+<dom-module id="my-view10">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">10</div>
+            <h1>Repeaters, Listeners and Boolean props</h1>
+            <h2>Houses</h2>
+            <template is="dom-repeat" items="{{thePerson.houses}}">
+                <!--<div>Location: <span>{{item.location}}</span></div>
+                <div>Price: <span>{{item.price}}</span></div>-->
+                <show-item house="{{item}}"></show-item>
+            </template>
+
+
+            <h2>Sell houses</h2>
+            <template is="dom-repeat" items="{{sellHouses}}">
+                <!--<div>Location: <span>{{item.location}}</span></div>
+        <div>Price: <span>{{item.price}}</span></div>-->
+                <show-item house="{{item}}" no-sell></show-item>
+            </template>
+
+            <br />
+            <br />
+            More info: <a href="https://www.polymer-project.org/1.0/docs/devguide/templates">https://www.polymer-project.org/1.0/docs/devguide/templates</a>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view10',
+            properties: {
+                sellHouses: {
+                    type: Array,
+                    value: function () {
+                        return [];
+                    }
+                }
+            },
+            listeners: {
+                'sell': '_sellHouse'
+            },
+            _sellHouse: function (event) {
+                var index = this.thePerson.houses.indexOf(event.detail);
+
+                if (index >= 0) {
+                    this.splice('thePerson.houses', index, 1);
+                    this.push('sellHouses', event.detail);
+                }
+                else
+                {
+                    index = this.sellHouses.indexOf(event.detail);
+                    this.splice('sellHouses', index, 1);
+                    this.push('thePerson.houses', event.detail);
+                }
+            }
+        });
+    </script>
+</dom-module>

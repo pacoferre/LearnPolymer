@@ -1,0 +1,18 @@
+﻿[
+  {
+    "location": "New york",
+    "price": 100000
+  },
+  {
+    "location": "Bahamas",
+    "price": 200000
+  },
+  {
+    "location": "Paris",
+    "price": 300000
+  },
+  {
+    "location": "Madrid",
+    "price": 400000
+  }
+]

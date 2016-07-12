@@ -1,0 +1,57 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="../lib/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view9">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">9</div>
+            <h1>Firing Events and DOM manipulation</h1>
+            <paper-input value="{{thePerson.name}}" label="Name"></paper-input>
+            <paper-input value="{{thePerson.surName}}" label="Surname"></paper-input>
+            <paper-button on-tap="_buttonTap" raised>Do something</paper-button>
+            <paper-input id="textInput" value="{{text}}" label="Text"></paper-input>
+
+            More info: <a href="https://www.polymer-project.org/1.0/docs/devguide/properties">https://www.polymer-project.org/1.0/docs/devguide/properties</a>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view9',
+            properties: {
+                text: {
+                    type: String,
+                },
+                thePerson: {
+                    type: Object,
+                    notify: true,
+                    observer: '_personChanged'
+                }
+            },
+            observers: [
+                '_personChangedDetail(thePerson.name, thePerson.surName)'
+            ],
+            _personChanged: function () {
+                console.debug('Person Object changed');
+            },
+            _personChangedDetail: function (name, surName) {
+                console.debug('Person changed to ' + name + ' ' + surName);
+
+                if (surName == 'Gates') {
+                    console.debug('Fire event gates');
+                    this.fire('gates', { prop1: "hello", prop2: "world", list: [1, 2, 3] });
+                }
+
+                this.$.textInput.value = name + ' ' + surName;
+            },
+            _buttonTap: function () {
+                this.thePerson = {
+                    name: 'New Steve',
+                    surName: 'Jobs'
+                };
+            },
+        });
+    </script>
+</dom-module>

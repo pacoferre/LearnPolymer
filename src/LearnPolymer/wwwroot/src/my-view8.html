@@ -1,0 +1,76 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="../lib/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view8">
+    <template>
+        <style include="shared-styles">
+            .red {
+                color: red;
+            }
+            .blue {
+                color: blue;
+            }
+        </style>
+        <div class="card">
+            <div class="circle">8</div>
+            <h1>Computed properties, Observers and Events</h1>
+            <paper-input value="{{thePerson.name}}" label="Name"></paper-input>
+            <paper-input value="{{thePerson.surName}}" label="Surname"></paper-input>
+
+            <div class$="[[_computeClass(thePerson.surName)]]">
+                Full name: [[fullName]]
+            </div>
+
+            <paper-button on-tap="_buttonTap" raised>Do something</paper-button>
+            <paper-input value="{{text}}" label="Text"></paper-input>
+
+            More info: <a href="https://www.polymer-project.org/1.0/docs/devguide/properties">https://www.polymer-project.org/1.0/docs/devguide/properties</a>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view8',
+            properties: {
+                text: {
+                    type: String,
+                    observer: '_textChanged'
+                },
+                thePerson: {
+                    type: Object,
+                    notify: true,
+                    observer: '_personChanged'
+                },
+                fullName: {
+                    type: String,
+                    computed: '_computeFullName(thePerson.name, thePerson.surName)'
+                },
+            },
+            observers: [
+                '_personChangedDetail(thePerson.name, thePerson.surName)'
+            ],
+            _computeFullName: function (name, surName) {
+                return name + ' ' + surName;
+            },
+            _computeClass: function (surName) {
+                return surName == 'Gates' ? 'red' : 'blue';
+            },
+            _textChanged: function (newValue, oldValue) {
+                console.debug('Text changed from ' + oldValue + " to " + newValue);
+            },
+            _personChanged: function () {
+                console.debug('Person Object changed');
+            },
+            _personChangedDetail: function (name, surName) {
+                console.debug('Person changed to ' + name + ' ' + surName);
+            },
+            _buttonTap: function () {
+                this.thePerson = {
+                    name: 'New Steve',
+                    surName: 'Jobs'
+                };
+            },
+        });
+    </script>
+</dom-module>

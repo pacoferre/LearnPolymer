@@ -1,0 +1,20 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view7">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">7</div>
+            <h1>Using objects</h1>
+            <paper-input value="{{thePerson.name}}" label="Name"></paper-input>
+            <paper-input value="{{thePerson.surName}}" label="Surname"></paper-input>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view7',
+        });
+    </script>
+</dom-module>

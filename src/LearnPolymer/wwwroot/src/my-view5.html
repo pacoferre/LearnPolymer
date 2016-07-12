@@ -1,0 +1,26 @@
+﻿<link rel="import" href="../lib/polymer/polymer.html">
+<link rel="import" href="../lib/paper-input/paper-input.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-view5">
+    <template>
+        <style include="shared-styles"></style>
+        <div class="card">
+            <div class="circle">5</div>
+            <h1>Notifying to parent</h1>
+            <paper-input value="{{text}}" label="Name"></paper-input>
+            Hello [[text]]
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'my-view5',
+            properties: {
+                text: {
+                    type: String,
+                    notify: true,
+                }
+            }
+        });
+    </script>
+</dom-module>
