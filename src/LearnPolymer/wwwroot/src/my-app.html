@@ -59,13 +59,12 @@
         </style>
 
         <app-drawer-layout fullbleed>
-
             <!-- Drawer content -->
             <app-drawer>
                 <app-toolbar>Menu</app-toolbar>
                 <iron-selector selected="{{currentView}}" attr-for-selected="name" class="drawer-list"
                                role="navigation">
-                    <div name="view1">1. Properties</div>
+                    <div name="view1">1. Components</div>
                     <div name="view2">2. Properties - Defining</div>
                     <div name="view3">3. Setting properties</div>
                     <div name="view4">4. Binding properties</div>
@@ -74,7 +73,7 @@
                     <div name="view7">7. Using objects</div>
                     <div name="view8">8. Computed, Observers and Events</div>
                     <div name="view9">9. Firing Events and DOM manipulation</div>
-                    <div name="view10">10. Repeaters, Listeners and Boolean props</div>
+                    <div name="view10">10. Repeaters, Boolean props and Listeners</div>
                     <div name="view11">11. AJAX</div>
                 </iron-selector>
             </app-drawer>
@@ -98,7 +97,7 @@
                     <my-view6 key="view6" name="{{person.name}}" sur-name="{{person.surName}}"></my-view6>
                     <my-view7 key="view7" the-person="{{person}}"></my-view7>
                     <my-view8 key="view8" the-person="{{person}}"></my-view8>
-                    <my-view9 key="view9" the-person="{{person}}" on-gates="_doGates"></my-view9>
+                    <my-view9 id="v9" key="view9" the-person="{{person}}" on-gates="_doGates"></my-view9>
                     <my-view10 key="view10" the-person="{{person}}"></my-view10>
                     <my-view11 key="view11"></my-view11>
                 </iron-pages>
@@ -144,10 +143,12 @@
                 this.text = 'Bill Gates has arrived!!!';
 
                 // Fail
-                this.person.name = 'Bill';
+                //this.person.name = 'Bill';
 
                 // Ok
-                //this.set('person.name', 'Bill');
+                this.set('person.name', 'Bill');
+
+                this.$.v9.text = "Hola";
             }
         });
     </script>

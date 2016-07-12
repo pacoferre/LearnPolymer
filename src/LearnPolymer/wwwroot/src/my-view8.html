@@ -20,7 +20,7 @@
             <paper-input value="{{thePerson.surName}}" label="Surname"></paper-input>
 
             <div class$="[[_computeClass(thePerson.surName)]]">
-                Full name: [[fullName]]
+                Full name [[_computeClass(thePerson.surName)]]: [[fullName]]
             </div>
 
             <paper-button on-tap="_buttonTap" raised>Do something</paper-button>
@@ -48,7 +48,8 @@
                 },
             },
             observers: [
-                '_personChangedDetail(thePerson.name, thePerson.surName)'
+                '_personChangedDetail(thePerson.name, thePerson.surName)',
+                '_personChangedDetailMultiple(thePerson.*)',
             ],
             _computeFullName: function (name, surName) {
                 return name + ' ' + surName;
@@ -56,7 +57,7 @@
             _computeClass: function (surName) {
                 return surName == 'Gates' ? 'red' : 'blue';
             },
-            _textChanged: function (newValue, oldValue) {
+            _textChanged: function (newValue, oldValue, text) {
                 console.debug('Text changed from ' + oldValue + " to " + newValue);
             },
             _personChanged: function () {
@@ -64,6 +65,9 @@
             },
             _personChangedDetail: function (name, surName) {
                 console.debug('Person changed to ' + name + ' ' + surName);
+            },
+            _personChangedDetailMultiple: function (record) {
+                console.debug('Person changed to ', record);
             },
             _buttonTap: function () {
                 this.thePerson = {

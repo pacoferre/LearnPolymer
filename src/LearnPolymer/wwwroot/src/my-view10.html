@@ -9,7 +9,7 @@
         <style include="shared-styles"></style>
         <div class="card">
             <div class="circle">10</div>
-            <h1>Repeaters, Listeners and Boolean props</h1>
+            <h1>Repeaters, Boolean props and Listeners</h1>
             <h2>Houses</h2>
             <template is="dom-repeat" items="{{thePerson.houses}}">
                 <!--<div>Location: <span>{{item.location}}</span></div>
@@ -20,8 +20,6 @@
 
             <h2>Sell houses</h2>
             <template is="dom-repeat" items="{{sellHouses}}">
-                <!--<div>Location: <span>{{item.location}}</span></div>
-        <div>Price: <span>{{item.price}}</span></div>-->
                 <show-item house="{{item}}" no-sell></show-item>
             </template>
 

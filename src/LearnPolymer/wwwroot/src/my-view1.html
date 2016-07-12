@@ -1,5 +1,6 @@
 <link rel="import" href="../lib/polymer/polymer.html">
 <link rel="import" href="../lib/paper-input/paper-input.html">
+
 <dom-module id="my-view1">
     <template>
         <style>
@@ -37,10 +38,10 @@
         </style>
         <div class="card">
             <div class="circle">1</div>
-            <h1>Properties</h1>
+            <h1>Components</h1>
             <paper-input value="{{text}}" label="Name"></paper-input>
             
-            Hello [[text]]
+            Hello {{text}}
         </div>
     </template>
     <script>
